@@ -28,9 +28,6 @@ async function validateIPN(req, res, next, options) {
     }
 }
 
-// const publickKey = '3551983b47842dd24ba321de8abf020b';
-// const secretKey = 'd481-4a20-bd4a-ce35f9d9358e';
-
 function ipnHandler(options = {}) {
     const { ipnPath, publicKey, secretKey } = options;
 

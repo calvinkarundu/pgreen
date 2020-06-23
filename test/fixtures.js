@@ -213,7 +213,7 @@ const payGreenSubscriptionResponse = {
         "answeredAt": "2020-06-23T07:57:56Z",
         "ttl": "PT10M"
     }
-}
+};
 
 module.exports = {
     secretKey: 'some-secret-key',
