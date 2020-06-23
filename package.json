@@ -1,0 +1,29 @@
+{
+  "name": "pgreen",
+  "version": "1.0.0",
+  "description": "Pay Green Utility exposing middleware for ipn management and validation as well as a subscription creation method",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calvinkarundu/pgreen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calvinkarundu/pgreen/issues"
+  },
+  "homepage": "https://github.com/calvinkarundu/pgreen#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "nock": "^12.0.3",
+    "supertest": "^4.0.2"
+  }
+}
