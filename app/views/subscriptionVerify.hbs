@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="card text-center" style="width: 18rem; margin-top: 10rem;">
+            {{#if successful}}
+            <div class="card-body">
+                <h5 class="card-title">Subscription payment successful!</h5>
+            </div>
+            {{/if}}
+
+            {{#unless successful}}
+            <div class="card-body">
+                <h5 class="card-title">Subscription payment failed!</h5>
+                <p class="card-text">{{ reason }}</p>
+            </div>
+            {{/unless}}
+        </div>
+    </div>
+</div>
