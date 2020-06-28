@@ -1,14 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
-const pGreen = require('../middleware');
+const { pGreen } = require('./utils');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,12 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /* IPN Handler middleware */
-const ipnHandlerOptions = {
-  ipnPath: '/ipn/paygreen',
-  publicKey: '11adda8f7eddb783cc39ebf7921ff721',
-  secretKey: 'f2f3-4009-93ce-714f18206eec',
-};
-app.use(pGreen.ipnHandler(ipnHandlerOptions));
+app.use(pGreen.ipnHandler());
 
 app.use('/', indexRouter);
 

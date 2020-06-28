@@ -1,23 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const pGreen = require('../../middleware');
+const { pGreen } = require('../utils');
 
 const { verifySubscription } = require('../mockCollection');
 
-const subscripionBaseOptions = {
-  publicKey: '11adda8f7eddb783cc39ebf7921ff721',
-  secretKey: 'f2f3-4009-93ce-714f18206eec',
-};
-
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   res.render('subscription', {
     title: 'Subscribe - Pay Green'
   });
 });
 
-router.post('/subscription', function (req, res, next) {
-  const subscriptionOptions = Object.assign({}, subscripionBaseOptions, {
+router.post('/subscription', function (req, res) {
+  const subscription = {
     orderId: 10,
     amount: 9,
     currency: 'EUR',
@@ -35,10 +30,10 @@ router.post('/subscription', function (req, res, next) {
       orderId: "test-123",
       display: "0"
     }
-  });
+  };
 
   pGreen
-    .initiateSubscription(subscriptionOptions)
+    .initiateSubscription(subscription)
     .then((response) => {
       const executionUrl = response.data.url;
       res.redirect(executionUrl);
@@ -59,7 +54,7 @@ router.post('/subscription', function (req, res, next) {
     });
 });
 
-router.post('/ipn/paygreen', function (req, res, next) {
+router.post('/ipn/paygreen', function (req, res) {
   const validatedTransaction = res.locals.payGreenTransaction;
 
   if (validateTransaction.success) {
@@ -69,7 +64,7 @@ router.post('/ipn/paygreen', function (req, res, next) {
   }
 });
 
-router.get('/subscription/verify/:orderId', function (req, res, next) {
+router.get('/subscription/verify/:orderId', function (req, res) {
   const orderId = req.params.orderId;
 
   /*
