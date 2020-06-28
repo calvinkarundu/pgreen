@@ -5,19 +5,19 @@
 **Usage**
 
 ```js
-const pGreen = require('pgreen');
+const PGreen = require('pgreen');
 
 const app = express();
 
-const ipnHandlerOptions = {
+const pGreen = new PGreen({
     ipnPath: '/ipn/paygreen',
     publicKey: 'some-public-key',
     secretKey: 'some-secret-key',
-};
+});
 
 /* IPN Handler middleware */
 
-app.use(pGreen.ipnHandler(ipnHandlerOptions));
+app.use(pGreen.ipnHandler());
 
 app.post('/ipn/paygreen', (req, res) => {
     const validatedTransaction = res.locals.payGreenTransaction;
@@ -31,14 +31,18 @@ app.post('/ipn/paygreen', (req, res) => {
 
 /* Initiating subscriptions */
 
-const subscripionOptions = {
-    subscription: { ... },
-    publicKey: 'some-public-key',
-    secretKey: 'some-secret-key',
-};
-
+const subscription = { ... };
 pGreen
-    .initiateSubscription(subscripionOptions)
+    .initiateSubscription(subscription)
+    .then((response) => {
+        console.log(response);
+    });
+
+/* Validating transactions */
+
+const transaction = { ... };
+pGreen
+    .validateTransaction(transaction)
     .then((response) => {
         console.log(response);
     });

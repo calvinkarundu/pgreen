@@ -3,7 +3,7 @@ const express = require('express');
 const request = require('supertest');
 const nock = require('nock');
 
-const pGreen = require('..');
+const PGreen = require('..');
 
 const {
     payGreenIPN,
@@ -17,11 +17,12 @@ describe('ipnHandler()', () => {
 
     beforeAll((done) => {
         app = express();
-        app.use(pGreen.ipnHandler({
+        const pGreen = new PGreen({
             ipnPath: '/ipn/paygreen',
             publicKey,
             secretKey,
-        }));
+        });
+        app.use(pGreen.ipnHandler());
 
         app.post('/ipn/paygreen', (req, res) => {
             if (res.locals.payGreenTransaction) {
@@ -40,11 +41,11 @@ describe('ipnHandler()', () => {
 
     test('validate options', (done) => {
         expect(() => {
-            pGreen.ipnHadler();
+            const pGreen = new PGreen();
         }).toThrow();
 
         expect(() => {
-            pGreen.ipnHadler({
+            const pGreen = new PGreen({
                 ipnPath: '',
                 publicKey: '',
                 secretKey: '',

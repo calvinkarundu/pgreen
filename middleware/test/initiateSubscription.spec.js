@@ -1,8 +1,7 @@
 /* global expect, beforeAll */
-
 const nock = require('nock');
 
-const pGreen = require('..');
+const PGreen = require('..');
 
 const {
     payGreenSubscription,
@@ -20,13 +19,17 @@ describe('initiateSubscription()', () => {
         done();
     });
 
-    test('initiates a subscription', () => pGreen.initiateSubscription({
-        publicKey,
-        secretKey,
-        subscription: payGreenSubscription,
-    })
-    .then((response) => {
-        expect(response.success).toEqual(payGreenSubscriptionResponse.success);
-        expect(response.data.id).toEqual(payGreenSubscriptionResponse.data.id);
-    }));
+    test('initiates a subscription', () => {
+        const pGreen = new PGreen({
+            ipnPath: '/ipn/paygreen',
+            publicKey,
+            secretKey,
+        });
+
+        return pGreen.initiateSubscription(payGreenSubscription)
+            .then((response) => {
+                expect(response.success).toEqual(payGreenSubscriptionResponse.success);
+                expect(response.data.id).toEqual(payGreenSubscriptionResponse.data.id);
+            });
+    });
 });
