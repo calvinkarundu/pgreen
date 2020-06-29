@@ -23,3 +23,11 @@ $ cd pgreen/app
 $ npm install
 $ npm run dev
 ```
+
+##Subscriptions
+
+Subscription transactions can be listed using the url `/transactions/subscriptions`. 
+To use this you require: 
+- MongoDB 
+
+installed on your system. Then follow the development instructions above.

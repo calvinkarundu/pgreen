@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const transactionsRouter = require('./routes/transactions');
 
 const { pGreen } = require('./utils');
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(pGreen.ipnHandler());
 
 app.use('/', indexRouter);
+app.use('/transactions', transactionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
