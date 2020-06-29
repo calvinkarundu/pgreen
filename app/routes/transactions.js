@@ -35,13 +35,22 @@ mongoose.connect('mongodb://localhost:27017/txn', {useNewUrlParser: true})
         // Fetch single subscription
         router.get('/subscriptions/:id', function (req, res) {
             SubscriptionModel.findOne({_id: req.params.id}).then(subscription => {
-                console.log(subscription);
-
                 res.render('subscriptionDetails', {
                     subscription: subscription,
                 });
             });
         });
+
+        // Fetch users subscriptions
+        router.get('/users/:id', function (req, res) {
+            SubscriptionModel.find({"buyer.id": req.params.id}).then(subscriptions => {
+                res.render('userSubscriptions', {
+                    title: 'Subscriptions',
+                    subscriptions: subscriptions,
+                });
+            });
+        });
+
     })
     .catch(error => {
         console.log('mongo error:', error);
