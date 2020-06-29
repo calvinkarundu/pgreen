@@ -10,6 +10,7 @@
                             <th>Order ID</th>
                             <th>Amount</th>
                             <th>Type</th>
+                            <th>Created</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -17,10 +18,11 @@
                         {{#each subscriptions}}
                             <tr>
                                 <td>{{this.orderId}}</td>
-                                <td>{{this.amount}}</td>
+                                <td>{{this.currency}} {{this.amount}}</td>
                                 <td>{{this.type}}</td>
+                                <td>{{this.createdAt}}</td>
                                 <td>
-                                    <a href="/transactions/subscriptions/{{this._id}}" class="btn btn-primary btn-sm">
+                                    <a href="/subscriptions/{{this.id}}" class="btn btn-primary btn-sm">
                                         View
                                     </a>
                                 </td>

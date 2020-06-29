@@ -4,8 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const transactionsRouter = require('./routes/transactions');
+// Renamed so as to fit into main system
+const subscriptionRouter = require('./routes/subscriptions');
 
 const { pGreen } = require('./utils');
 
@@ -23,8 +23,7 @@ app.use(cookieParser());
 /* IPN Handler middleware */
 app.use(pGreen.ipnHandler());
 
-app.use('/', indexRouter);
-app.use('/transactions', transactionsRouter);
+app.use('/', subscriptionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

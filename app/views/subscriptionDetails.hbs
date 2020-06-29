@@ -7,24 +7,24 @@
                     <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <th>Buyer</th>
-                            <td>{{subscription.buyer.firstName}} {{subscription.buyer.lastName}}</td>
+                            <th>User</th>
+                            <td>{{subscription.userId}}</td>
                         </tr>
                         <tr>
                             <th>Buyer Email</th>
-                            <td>{{subscription.buyer.email}}</td>
+                            <td>{{subscription.userId}}</td>
                         </tr>
                         <tr>
                             <th>Buyer ID</th>
                             <td>
-                                <a href="/transactions/users/{{subscription.buyer.id}}">
-                                    {{subscription.buyer.id}}
+                                <a href="/users/{{subscription.userId}}">
+                                    {{subscription.userId}}
                                 </a>
                             </td>
                         </tr>
                         <tr>
                             <th>Order ID</th>
-                            <td>{{subscription.paymentToken}}</td>
+                            <td>{{subscription.orderId}}</td>
                         </tr>
                         <tr>
                             <th>Amount (in {{subscription.currency}})</th>
@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <th>Payment Status</th>
-                            <td>{{subscription.result.status}}</td>
+                            <td>{{subscription.status}}</td>
                         </tr>
                         <tr>
                             <th>URL</th>

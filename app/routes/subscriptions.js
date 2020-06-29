@@ -5,6 +5,8 @@ const {pGreen} = require('../utils');
 
 const {verifySubscription} = require('../mockCollection');
 
+const {createSubscriptionFromResponse, Subscription} = require('../models/subscriptions');
+
 router.get('/', function (req, res) {
     res.render('subscription', {
         title: 'Subscribe - Pay Green'
@@ -26,6 +28,13 @@ router.post('/subscription', function (req, res) {
             startAt: Date.now().toString(),
             firstAmount: 0
         },
+        buyer: {
+            id: 10,
+            email: "test@mail.com",
+            lastName: "Test",
+            firstName: "Name",
+            country: "FR",
+        },
         metadata: {
             orderId: "test-123",
             display: "0"
@@ -35,6 +44,10 @@ router.post('/subscription', function (req, res) {
     pGreen
         .initiateSubscription(subscription)
         .then((response) => {
+            createSubscriptionFromResponse(response.data)
+                .catch(error => {
+                    console.log('Error creating subscription', error);
+                });
             const executionUrl = response.data.url;
             res.redirect(executionUrl);
         })
@@ -42,7 +55,7 @@ router.post('/subscription', function (req, res) {
             /*
               This fails as we can't get PayGreen requests to respond successfully.
               I'm faking the redirect with a sample transactions execution URL I created from the dashboard.
-              Ideally, we would extract this URL from a succesfull PayGreen API call.
+              Ideally, we would extract this URL from a successful PayGreen API call.
             */
             const subscriptionFullfilmentPage = 'https://paygreen.fr/payment/execute/pr04d3790fc9018d88262149610633c3c0';
             res.redirect(subscriptionFullfilmentPage);
@@ -53,6 +66,51 @@ router.post('/subscription', function (req, res) {
             */
         });
 });
+
+router.get('/subscriptions', function (req, res) {
+    Subscription.findAll()
+        .then(subscriptions => {
+            res.render('subscriptionList', {
+                title: 'Subscriptions',
+                subscriptions: subscriptions,
+            })
+        })
+        .catch(error => {
+            res.send(error.message);
+            console.log(error);
+        })
+});
+
+router.get('/subscriptions/:id', function (req, res) {
+    Subscription.findByPk(req.params.id)
+        .then(subscription => {
+            res.render('subscriptionDetails', {
+                title: 'Subscription',
+                subscription: subscription,
+            })
+        })
+        .catch(error => {
+            res.send(error.message);
+            console.log(error);
+        })
+});
+
+router.get('/users/:id', function (req, res) {
+    Subscription.findAll({
+        userId: req.params.id,
+    })
+        .then(subscriptions => {
+            res.render('userSubscriptions', {
+                title: 'User Subscriptions',
+                subscriptions: subscriptions,
+            });
+        })
+        .catch(error => {
+            res.send(error.message);
+            console.log(error);
+        })
+})
+
 
 router.post('/ipn/paygreen', function (req, res) {
     const validatedTransaction = res.locals.payGreenTransaction;
