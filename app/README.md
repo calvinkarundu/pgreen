@@ -13,7 +13,8 @@
 1. Go to the index page `/` to initiate a subscription
    - You should get redirected to a PayGreen payment page
 2. Go to the subscription validation page `/subscription/validate/test-123` to simulate having being redirected from the PayGreen page
-   - Order should be valdated after 10s
+   - Order should be validated after 10s
+3. Go to `/subscriptions` to view a list of all subscriptions
 
 **Development**
 
@@ -23,11 +24,3 @@ $ cd pgreen/app
 $ npm install
 $ npm run dev
 ```
-
-##Subscriptions
-
-Subscription transactions can be listed using the url `/transactions/subscriptions`. 
-To use this you require: 
-- MongoDB 
-
-installed on your system. Then follow the development instructions above.
