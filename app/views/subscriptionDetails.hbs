@@ -1,0 +1,51 @@
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body shadow-sm">
+                    <h3 class="mb-3">Subscription Details</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>User</th>
+                            <td>{{subscription.userId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Buyer Email</th>
+                            <td>{{subscription.userId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Buyer ID</th>
+                            <td>
+                                <a href="/users/{{subscription.userId}}">
+                                    {{subscription.userId}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Order ID</th>
+                            <td>{{subscription.orderId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Amount (in {{subscription.currency}})</th>
+                            <td>{{subscription.amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Payment Type</th>
+                            <td>{{subscription.type}}</td>
+                        </tr>
+                        <tr>
+                            <th>Payment Status</th>
+                            <td>{{subscription.status}}</td>
+                        </tr>
+                        <tr>
+                            <th>URL</th>
+                            <td><a href="{{subscription.url}}">{{subscription.url}}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

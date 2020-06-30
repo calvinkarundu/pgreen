@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 py-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    {{#if message}}
+                        <div class="alert alert-danger">
+                            {{message}}
+                        </div>
+                    {{/if}}
+                    <h3 class="text-center my-3">Subscription Transactions</h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each subscriptions}}
+                            <tr>
+                                <td>{{this.orderId}}</td>
+                                <td>{{this.userId}}</td>
+                                <td>{{this.amount}} ({{this.currency}})</td>
+                                <td>{{this.status}}</td>
+                                <td>
+                                    <a href="/subscriptions/{{this.id}}" class="btn btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="5">No records found.</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
